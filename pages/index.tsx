@@ -16,6 +16,7 @@ import * as d3 from 'd3'
 import { Modal } from 'antd'
 import 'antd/dist/antd.css'
 import { propCircle, propLine, propText, propC } from './components/Interfaces'
+import Line from './components/Line'
 
 export default function Index() {
     let initialDataJson: propC = {
@@ -123,6 +124,8 @@ export default function Index() {
             })
     }, [])
     return <>
+
+        <Line />
         <div style={{ width: '19%', height: '310px', float: 'left' }}>
             <svg ref={titulos} width='98%' height='310px' style={{ backgroundColor: '#E6E6FA', marginLeft: '10px', marginRight: '10px', marginBottom: '1px' }}></svg>
         </div>

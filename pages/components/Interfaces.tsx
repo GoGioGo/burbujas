@@ -26,6 +26,7 @@ export interface propText {
     text:String, 
     size?:String    
 }
-export function uno(){
-    
+export interface data{
+    x:number[],
+    y:number[]
 }
