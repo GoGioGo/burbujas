@@ -24,14 +24,14 @@ export default function Line() {
 
 
     useEffect(() => {
+        let color=['black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black']
       
         circle(svgRef, 130, 120, dataC)
-        linePath(svgRef, x2, y2, 1)
-        linePath(svgRef, x, y, 2)
+        linePath(svgRef, x2, y2, 1, color)
+        linePath(svgRef, x, y, 2, color)
 
         lineL(svgRef, 128, 9, 128, 240)
         lineL(svgRef, 5, 120, 240, 120)
-
        
         d3.selectAll('path')
             .on('mouseover', function (d, i) {

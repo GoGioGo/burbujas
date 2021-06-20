@@ -1,7 +1,37 @@
 import * as d3 from 'd3'
 import { useState } from 'react'
 import { propLine, propText, propC } from './Interfaces'
+import { obtX, obtY } from './functions2'
 
+//grafica textos de los bordes del spider chart
+export function textGra(svgRef: any, x: number, y: string, grados: number) {
+    let h: propText = {
+        x: 0,
+        y: 0,
+        text: ''
+    }
+    if (grados < 180)
+        h.y = Math.abs(obtY(x, grados))
+    else
+        h.y = -Math.abs(obtY(x, grados))
+    if (grados < 90 || grados > 270)
+        h.x = Math.abs(obtX(x, grados))
+    else
+        h.x = -Math.abs(obtX(x, grados))
+    h.text = y
+    text(h, svgRef)
+}
+//grafica texto en cuanquier lugar
+export function text(x: propText, svgRef: any) {
+    d3.select(svgRef.current)
+        .append('text')
+        .attr('font-size', `${x.size}`)
+        .attr('font-weight', 'bold')
+        .style('opacity', '1')
+        .attr('x', x.x)
+        .attr('y', x.y)
+        .text(`${x.text}`)
+}
 export function printLine(x: propLine, y: string, z: string) {
     d3.select(`#${y}`)
         .append('line')
@@ -48,12 +78,14 @@ export function printCircleP(x: propC[], svgRef: any, color: string, c: string) 
         .attr('fill', color)
 }
 
+
+
 export function generateNewJson(x: propC[]) {
 
-    x.map((e:propC)=>{
-        e.percentage=Math.ceil(Math.random()*100)
-        e.poblationWeighted=Math.ceil(Math.random()*10)*100000
-        e.poblationMedian=Math.ceil(Math.random()*10)*100000
+    x.map((e: propC) => {
+        e.percentage = Math.ceil(Math.random() * 100)
+        e.poblationWeighted = Math.ceil(Math.random() * 10) * 100000
+        e.poblationMedian = Math.ceil(Math.random() * 10) * 100000
     })
 }
 
@@ -64,21 +96,12 @@ export function transitionCircle(x: propC[], svgRef: any) {
             .selectAll('circle')
             .transition()
             .duration(2000)
-            .attr('cx', function (d, i) { return x[i].percentage* 4 })
-            .attr('cy', function (d, i) { return  x[i].poblationWeighted/ 10000 })
+            .attr('cx', function (d, i) { return x[i].percentage * 4 })
+            .attr('cy', function (d, i) { return x[i].poblationWeighted / 10000 })
     }
 }
 
-export function text(x: propText, svgRef: any) {
-    d3.select(svgRef.current)
-        .append('text')
-        .attr('font-size', `${x.size}`)
-        .attr('font-weight', 'bold')
-        .style('opacity', '1')
-        .attr('x', x.x)
-        .attr('y', x.y)
-        .text(`${x.text}`)
-}
+
 
 export function setText(data: string[], svgRef: any, x: number, y: number, size: string, orientacionText: boolean) {
     if (orientacionText) {
