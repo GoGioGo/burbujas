@@ -2,16 +2,6 @@ import { useRef } from "react";
 import * as d3 from 'd3'
 import { data } from './Interfaces'
 
-export function graficaUncirculo(x: number, y: number, r: number, svgRef: any) {
-    d3.select(svgRef.current)
-        .append('circle')
-        .attr('x', x)
-        .attr('y', y)
-        .attr('r', r)
-        .attr('fill', 'black')
-    //.attr('class', 'asd' + i+j)
-
-}
 export function generaPuntosY(array: number[], grados: number): number[] {
     let puntosY = [0]
     for (let i = 0; i < array.length; i++) {
@@ -61,7 +51,7 @@ export function generadorArray(): number[] {
 export function generadorArrayDeterminado(x: number): number[] {
     let array = [1]
     for (let i = 0; i < x; i++)
-        array[i] = Math.ceil(Math.random() * 300)
+        array[i] = Math.ceil((Math.random() * (1 - 0.2) + 0.2) * 300)
     return array
 }
 export function lineP(svgRef: any, dat: data[]) {
@@ -69,7 +59,6 @@ export function lineP(svgRef: any, dat: data[]) {
     const myLine = d3.line()
         .x((value: any, index) => value.x[index])
         .x((value: any, index) => value.y[index])
-        .curve(d3.curveCardinal)
     svg3.selectAll('path')
         .data([dat])
         .join(
@@ -79,7 +68,6 @@ export function lineP(svgRef: any, dat: data[]) {
                 .attr('opacity', '0.8')
         )
         .attr('d', function (d: any) {
-            console.log(d)
             return myLine(d)
         })
         .attr('fill', 'pink')
@@ -87,6 +75,15 @@ export function lineP(svgRef: any, dat: data[]) {
         .attr('opacity', '0.4')
 }
 
+export function graficaUncirculo(x: number, y: number, r: number, svgRef: any, h: number, j: number) {
+    d3.select(svgRef.current)
+        .append('circle')
+        .attr('cx', x)
+        .attr('cy', y)
+        .attr('r', r)
+        .attr('fill', 'black')
+        .attr('id', 'smallcircle' + h + j)
+}
 export function printChart(a1: number[], a2: number[], a3: number[], a4: number[], a5: number[], a6: number[], a7: number[], a8: number[], a9: number[],
     m1: number, m2: number, m3: number, m4: number, m5: number, m6: number, m7: number, m8: number, m9: number, svgRef: any) {
     let x = [0];
@@ -103,7 +100,7 @@ export function printChart(a1: number[], a2: number[], a3: number[], a4: number[
                         y[j] = Math.abs(obtY(a1[i], m1))
                     else
                         y[j] = -Math.abs(obtY(a1[i], m1))
-                    graficaUncirculo(x[j], y[j], 2, svgRef)
+                    graficaUncirculo(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 1:
                     if (m2 < 90 || m2 > 270)
@@ -114,6 +111,7 @@ export function printChart(a1: number[], a2: number[], a3: number[], a4: number[
                         y[j] = Math.abs(obtY(a2[i], m2))
                     else
                         y[j] = -Math.abs(obtY(a2[i], m2))
+                    graficaUncirculo(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 2:
                     if (m3 < 90 || m3 > 270)
@@ -124,7 +122,7 @@ export function printChart(a1: number[], a2: number[], a3: number[], a4: number[
                         y[j] = Math.abs(obtY(a3[i], m3))
                     else
                         y[j] = -Math.abs(obtY(a3[i], m3))
-
+                    graficaUncirculo(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 3:
                     if (m4 < 90 || m4 > 270)
@@ -135,7 +133,7 @@ export function printChart(a1: number[], a2: number[], a3: number[], a4: number[
                         y[j] = Math.abs(obtY(a4[i], m4))
                     else
                         y[j] = -Math.abs(obtY(a4[i], m4))
-
+                    graficaUncirculo(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 4:
                     if (m5 < 90 || m5 > 270)
@@ -146,7 +144,7 @@ export function printChart(a1: number[], a2: number[], a3: number[], a4: number[
                         y[j] = Math.abs(obtY(a5[i], m5))
                     else
                         y[j] = -Math.abs(obtY(a5[i], m5))
-
+                    graficaUncirculo(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 5:
                     if (m6 < 90 || m6 > 270)
@@ -157,6 +155,7 @@ export function printChart(a1: number[], a2: number[], a3: number[], a4: number[
                         y[j] = Math.abs(obtY(a6[i], m6))
                     else
                         y[j] = -Math.abs(obtY(a6[i], m6))
+                    graficaUncirculo(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 6:
                     if (m7 < 90 || m7 > 270)
@@ -167,6 +166,7 @@ export function printChart(a1: number[], a2: number[], a3: number[], a4: number[
                         y[j] = Math.abs(obtY(a7[i], m7))
                     else
                         y[j] = -Math.abs(obtY(a7[i], m7))
+                    graficaUncirculo(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 7:
                     if (m8 < 90 || m8 > 270)
@@ -177,6 +177,7 @@ export function printChart(a1: number[], a2: number[], a3: number[], a4: number[
                         y[j] = Math.abs(obtY(a8[i], m8))
                     else
                         y[j] = -Math.abs(obtY(a8[i], m8))
+                    graficaUncirculo(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 8:
                     if (m9 < 90 || m9 > 270)
@@ -187,6 +188,7 @@ export function printChart(a1: number[], a2: number[], a3: number[], a4: number[
                         y[j] = Math.abs(obtY(a9[i], m9))
                     else
                         y[j] = -Math.abs(obtY(a9[i], m9))
+                    graficaUncirculo(x[j], y[j], 4, svgRef, i, j)
                     break;
                 default:
                     console.log('se salio del switch')
@@ -197,7 +199,13 @@ export function printChart(a1: number[], a2: number[], a3: number[], a4: number[
         linePath(svgRef, x, y, i, ['red', 'pink', 'yelllow', 'blue', 'green', 'orange', 'brown', 'purple', 'gray'])
     }
 }
-
+export function graficaUncirculoT(x: number, y: number, r: number, svgRef: any, h: number, j: number) {
+    d3.select('#smallcircle' + h + j)
+        .transition()
+        .duration(2000)
+        .attr('cx', x)
+        .attr('cy', y)
+}
 export function printChart2(a1: number[], a2: number[], a3: number[], a4: number[], a5: number[], a6: number[], a7: number[], a8: number[], a9: number[],
     m1: number, m2: number, m3: number, m4: number, m5: number, m6: number, m7: number, m8: number, m9: number, svgRef: any) {
     let x = [0];
@@ -214,6 +222,7 @@ export function printChart2(a1: number[], a2: number[], a3: number[], a4: number
                         y[j] = Math.abs(obtY(a1[i], m1))
                     else
                         y[j] = -Math.abs(obtY(a1[i], m1))
+                    graficaUncirculoT(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 1:
                     if (m2 < 90 || m2 > 270)
@@ -224,6 +233,7 @@ export function printChart2(a1: number[], a2: number[], a3: number[], a4: number
                         y[j] = Math.abs(obtY(a2[i], m2))
                     else
                         y[j] = -Math.abs(obtY(a2[i], m2))
+                    graficaUncirculoT(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 2:
                     if (m3 < 90 || m3 > 270)
@@ -234,6 +244,7 @@ export function printChart2(a1: number[], a2: number[], a3: number[], a4: number
                         y[j] = Math.abs(obtY(a3[i], m3))
                     else
                         y[j] = -Math.abs(obtY(a3[i], m3))
+                    graficaUncirculoT(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 3:
                     if (m4 < 90 || m4 > 270)
@@ -244,6 +255,7 @@ export function printChart2(a1: number[], a2: number[], a3: number[], a4: number
                         y[j] = Math.abs(obtY(a4[i], m4))
                     else
                         y[j] = -Math.abs(obtY(a4[i], m4))
+                    graficaUncirculoT(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 4:
                     if (m5 < 90 || m5 > 270)
@@ -254,6 +266,7 @@ export function printChart2(a1: number[], a2: number[], a3: number[], a4: number
                         y[j] = Math.abs(obtY(a5[i], m5))
                     else
                         y[j] = -Math.abs(obtY(a5[i], m5))
+                    graficaUncirculoT(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 5:
                     if (m6 < 90 || m6 > 270)
@@ -264,6 +277,7 @@ export function printChart2(a1: number[], a2: number[], a3: number[], a4: number
                         y[j] = Math.abs(obtY(a6[i], m6))
                     else
                         y[j] = -Math.abs(obtY(a6[i], m6))
+                    graficaUncirculoT(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 6:
                     if (m7 < 90 || m7 > 270)
@@ -274,6 +288,7 @@ export function printChart2(a1: number[], a2: number[], a3: number[], a4: number
                         y[j] = Math.abs(obtY(a7[i], m7))
                     else
                         y[j] = -Math.abs(obtY(a7[i], m7))
+                    graficaUncirculoT(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 7:
                     if (m8 < 90 || m8 > 270)
@@ -284,6 +299,7 @@ export function printChart2(a1: number[], a2: number[], a3: number[], a4: number
                         y[j] = Math.abs(obtY(a8[i], m8))
                     else
                         y[j] = -Math.abs(obtY(a8[i], m8))
+                    graficaUncirculoT(x[j], y[j], 4, svgRef, i, j)
                     break;
                 case 8:
                     if (m9 < 90 || m9 > 270)
@@ -294,6 +310,7 @@ export function printChart2(a1: number[], a2: number[], a3: number[], a4: number
                         y[j] = Math.abs(obtY(a9[i], m9))
                     else
                         y[j] = -Math.abs(obtY(a9[i], m9))
+                    graficaUncirculoT(x[j], y[j], 4, svgRef, i, j)
                     break;
                 default:
                     console.log('se salio del switch')
@@ -306,79 +323,79 @@ export function printChart2(a1: number[], a2: number[], a3: number[], a4: number
 }
 
 export function linePath(svgRef: any, x: number[], y: number[], id: number, color: string[]) {
-    const svg3 = d3.select(svgRef.current)
-    const myLine3 = d3.line()
+    const svg = d3.select(svgRef.current)
+    const myLine = d3.line()
         .x((value, index) => x[index])
         .y((value: any) => value)
-        .curve(d3.curveCardinal)
-    var f = svg3
+    var f = svg
         .selectAll('path')
-        .filter('asd' + id)
+        .filter('#Path' + id)
         .data([y]);
-    f
-        .join(
-            enter => enter
-                .append('path'),
-            update => update
+    f.join(
+        enter => enter
+            .append('path'),
+        update => update
 
-                .attr('opacity', '0.4'),
-            exit => exit.remove()
-        )
-
+            .attr('opacity', '0.4')
+    )
         .attr('d', function (d: any, i) {
-            return myLine3(d)
+            return myLine(d)
         })
         .attr('fill', function (d, i) {
             return color[id]
         })
         .attr('stroke', 'black')
-        .attr('class', 'asd' + id)
+        .attr('id', 'Path' + id)
         .attr('opacity', '0.3')
         .style('stroke-opacity', '1')
 }
 export function transitionLinePath(svgRef: any, x: number[], y: number[], id: number) {
-    console.log('entro')
 
     const svg3 = d3.select(svgRef.current)
+        .selectAll('path')
+        .filter('#Path' + id)
+
     const myLine = d3.line()
         .x((value, index) => x[index])
-        .y((value: any) => value)
-        .curve(d3.curveCardinal)
-    svg3
-        .selectAll('path')
-        .filter('asd' + id)
-        .transition()
-        .duration(2000)
-        .attr('d', function (d: any, i) {
-            return myLine(d)
-        })
-    console.log('salio')
+        .y((value: any, index) => y[index])
+
+    for (let i = 0; i < x.length; i++) {
+        svg3
+            .transition()
+            .duration(2000)
+            .attr('d', function (d: any, i) {
+                return myLine(d)
+            })
+    }
 }
-export function lineL(svgRef: any, x1: number, y1: number, x2: number, y2: number) {
-    d3.select(svgRef.current)
-        .append('line')
-        .attr('x1', x1)
-        .attr('x2', x2)
-        .attr('y1', y1)
-        .attr('y2', y2)
-        .attr('opacity', '0.4')
-        .attr('stroke', 'black')
-}
-export function circle(svgRef: any, x: number, y: number, data: number[]) {
-    const svgC = d3.select(svgRef.current)
+
+export function drawCircle(ref: any, x: number[], y: number[], id: string) {
+
+    let svg = d3.select(ref.current)
         .selectAll('circle')
-        .data(data)
-        .join(
-            enter => enter
-                .append('circle'),
-            update => update
-                .attr('class', 'updated'),
-            exit => exit.remove()
-        )
-        .attr('r', function (d: number) { return d })
-        .attr('cx', x/* function (d: number, i: number) { return d } */)
-        .attr('cy', y/* value => value */)
+        .filter(`#id`)
+        .data(x)
+        .enter()
+        .append('circle')
+        .attr('id', function (d: any, i) { return `${id}` + i })
+        .attr('cx', function (d: any, i) { return x[i] })
+        .attr('cy', function (d: any, i) { return y[i] })
+        .attr('r', function (d: any) { return 5 })
+        .attr('fill', 'black')
+}
+export function Circle(ref: any, x: number[], id: string) {
+    console.log('entrocircle')
+    let svg = d3.select(ref.current)
+        .selectAll('circle')
+        .filter(`#${id}`)
+        .data(x)
+        .enter()
+        .append('circle')
+        .attr('id', function (d, i) { return id + i })
+        .attr('r', function (d: any) { return d })
         .attr('fill', 'none')
         .attr('stroke', 'black')
-        .attr('opacity', '1')
+
+    console.log('saliocircle')
+
 }

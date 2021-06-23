@@ -78,30 +78,25 @@ export function printCircleP(x: propC[], svgRef: any, color: string, c: string) 
         .attr('fill', color)
 }
 
-
+export function transitionCircle(x: propC[], svgRef: any, c: string) {
+    let h = d3.select(svgRef.current)
+        .selectAll('circle')
+    for (let i = 0; i <= x.length - 1; i++) {
+        h.filter(`#${c}` + i)
+            .transition()
+            .duration(2000)
+            .attr('cx', function (d, j) { return x[i].percentage * 4 })
+            .attr('cy', function (d, j) { return x[i].poblationWeighted / 10000 })
+    }
+}
 
 export function generateNewJson(x: propC[]) {
-
     x.map((e: propC) => {
         e.percentage = Math.ceil(Math.random() * 100)
         e.poblationWeighted = Math.ceil(Math.random() * 10) * 100000
         e.poblationMedian = Math.ceil(Math.random() * 10) * 100000
     })
 }
-
-export function transitionCircle(x: propC[], svgRef: any) {
-    console.log(x)
-    for (let i = 0; i <= x.length - 1; i++) {
-        d3.select(svgRef.current)
-            .selectAll('circle')
-            .transition()
-            .duration(2000)
-            .attr('cx', function (d, i) { return x[i].percentage * 4 })
-            .attr('cy', function (d, i) { return x[i].poblationWeighted / 10000 })
-    }
-}
-
-
 
 export function setText(data: string[], svgRef: any, x: number, y: number, size: string, orientacionText: boolean) {
     if (orientacionText) {
