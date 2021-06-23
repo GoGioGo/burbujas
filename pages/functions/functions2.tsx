@@ -199,6 +199,128 @@ export function printChart(a1: number[], a2: number[], a3: number[], a4: number[
         linePath(svgRef, x, y, i, ['red', 'pink', 'yelllow', 'blue', 'green', 'orange', 'brown', 'purple', 'gray'])
     }
 }
+
+export function printChart3( svgRef: any, n:number, m:number, a1?: number[], a2?: number[], a3?: number[], a4?: number[], a5?: number[], a6?: number[], a7?: number[], a8?: number[], a9?: number[]) {
+    
+    let pend =[]
+    for (let h=0;h<n; h++)
+    {
+        pend[h]=m*(h+1)
+    }
+    let x = [0];
+    let y = [0];
+     for (let i = 0; i < 7; i++) {
+        for (let j = 0; j < n; j++) {
+            switch (j) {
+                case 0:
+                    if (pend[j] < 90 || pend[j] > 270)
+                        x[j] = Math.abs(obtX(a1![i], pend[j]))
+                    else
+                        x[j] = -Math.abs(obtX(a1![i], pend[j]))
+                    if (pend[j] < 180)
+                        y[j] = Math.abs(obtY(a1![i], pend[j]))
+                    else
+                        y[j] = -Math.abs(obtY(a1![i], pend[j]))
+                    graficaUncirculo(x[j], y[j], 9, svgRef, i, j)
+                    break;
+                case 1:
+                    if (pend[j] < 90 || pend[j] > 270)
+                        x[j] = Math.abs(obtX(a2![i], pend[j]))
+                    else
+                        x[j] = -Math.abs(obtX(a2![i], pend[j]))
+                    if (pend[j] < 180)
+                        y[j] = Math.abs(obtY(a2![i], pend[j]))
+                    else
+                        y[j] = -Math.abs(obtY(a2![i], pend[j]))
+                    graficaUncirculo(x[j], y[j], 9, svgRef, i, j)
+                    break;
+                case 2:
+                    if (pend[j] < 90 || pend[j] > 270)
+                        x[j] = Math.abs(obtX(a3![i], pend[j]))
+                    else
+                        x[j] = -Math.abs(obtX(a3![i], pend[j]))
+                    if (pend[j] < 180)
+                        y[j] = Math.abs(obtY(a3![i], pend[j]))
+                    else
+                        y[j] = -Math.abs(obtY(a3![i], pend[j]))
+                    graficaUncirculo(x[j], y[j], 9, svgRef, i, j)
+                    break;
+                case 3:
+                    if (pend[j] < 90 || pend[j] > 270)
+                        x[j] = Math.abs(obtX(a4![i], pend[j]))
+                    else
+                        x[j] = -Math.abs(obtX(a4![i], pend[j]))
+                    if (pend[j] < 180)
+                        y[j] = Math.abs(obtY(a4![i], pend[j]))
+                    else
+                        y[j] = -Math.abs(obtY(a4![i], pend[j]))
+                    graficaUncirculo(x[j], y[j], 9, svgRef, i, j)
+                    break;
+                case 4:
+                    if (pend[j] < 90 || pend[j] > 270)
+                        x[j] = Math.abs(obtX(a5![i], pend[j]))
+                    else
+                        x[j] = -Math.abs(obtX(a5![i], pend[j]))
+                    if (pend[j] < 180)
+                        y[j] = Math.abs(obtY(a5![i], pend[j]))
+                    else
+                        y[j] = -Math.abs(obtY(a5![i], pend[j]))
+                    graficaUncirculo(x[j], y[j], 9, svgRef, i, j)
+                    break;
+                case 5:
+                    if (pend[j] < 90 || pend[j] > 270)
+                        x[j] = Math.abs(obtX(a6![i], pend[j]))
+                    else
+                        x[j] = -Math.abs(obtX(a6![i], pend[j]))
+                    if (pend[j] < 180)
+                        y[j] = Math.abs(obtY(a6![i], pend[j]))
+                    else
+                        y[j] = -Math.abs(obtY(a6![i], pend[j]))
+                    graficaUncirculo(x[j], y[j], 9, svgRef, i, j)
+                    break;
+                case 6:
+                    if (pend[j] < 90 || pend[j] > 270)
+                        x[j] = Math.abs(obtX(a7![i], pend[j]))
+                    else
+                        x[j] = -Math.abs(obtX(a7![i], pend[j]))
+                    if (pend[j] < 180)
+                        y[j] = Math.abs(obtY(a7![i], pend[j]))
+                    else
+                        y[j] = -Math.abs(obtY(a7![i], pend[j]))
+                    graficaUncirculo(x[j], y[j], 9, svgRef, i, j)
+                    break;
+                case 7:
+                    if (pend[j] < 90 || pend[j] > 270)
+                        x[j] = Math.abs(obtX(a8![i], pend[j]))
+                    else
+                        x[j] = -Math.abs(obtX(a8![i], pend[j]))
+                    if (pend[j] < 180)
+                        y[j] = Math.abs(obtY(a8![i], pend[j]))
+                    else
+                        y[j] = -Math.abs(obtY(a8![i], pend[j]))
+                    graficaUncirculo(x[j], y[j], 9, svgRef, i, j)
+                    break;
+                case 8:
+                    if (pend[j] < 90 || pend[j] > 270)
+                        x[j] = Math.abs(obtX(a9![i], pend[j]))
+                    else
+                        x[j] = -Math.abs(obtX(a9![i], pend[j]))
+                    if (pend[j] < 180)
+                        y[j] = Math.abs(obtY(a9![i], pend[j]))
+                    else
+                        y[j] = -Math.abs(obtY(a9![i], pend[j]))
+                    graficaUncirculo(x[j], y[j], 9, svgRef, i, j)
+                    break;
+                default:
+                    console.log('se salio del switch')
+            }
+        }
+        x[9] = x[0]
+        y[9] = y[0]
+        linePath(svgRef, x, y, i, ['red', 'pink', 'yelllow', 'blue', 'green', 'orange', 'brown', 'purple', 'gray'])
+    } 
+}
+
 export function graficaUncirculoT(x: number, y: number, r: number, svgRef: any, h: number, j: number) {
     d3.select('#smallcircle' + h + j)
         .transition()

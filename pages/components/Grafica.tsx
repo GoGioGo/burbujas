@@ -1,9 +1,19 @@
-import { useEffect, useRef } from 'react';
-import { Circle, drawCircle, generadorArrayDeterminado, generaPuntosX, generaPuntosY, linePath, printChart, printChart2 } from '../functions/functions2'
+import { useEffect, useRef, useState } from 'react';
+import { Circle, drawCircle, generadorArrayDeterminado, generaPuntosX, generaPuntosY, linePath, printChart, printChart2, printChart3 } from '../functions/functions2'
 import { textGra } from '../functions/Functions'
 import * as d3 from 'd3'
+import { Checkbox } from 'antd';
 
+const CheckboxGroup = Checkbox.Group;
 export default function Grafica() {
+
+    let options = ['Not Elegible', 'Unable to provide Require', 'Technical dificultes with web site',
+        'No vaccine apointments', 'Apointment times did', 'Limit internet', 'Need childcare', 'Difficulty traveling', 'Difficult leave']
+    const [checkedList, setCheckedList] = useState([]);
+    const onChange = (list: any) => {
+        setCheckedList(list);
+    };
+
     let color = ['black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black']
 
     let UnaPro = generadorArrayDeterminado(7);
@@ -17,6 +27,7 @@ export default function Grafica() {
     let DifL = generadorArrayDeterminado(7)
 
     const svgRef2 = useRef<SVGSVGElement | null>(null)
+    const svgRef4 = useRef<SVGSVGElement | null>(null)
 
     function transition() {
         d3.select('#btnChart')
@@ -34,6 +45,49 @@ export default function Grafica() {
             })
     }
 
+    function genera() {
+        d3.select('#btnGenera')
+            .on('click', () => {
+                let m = 360 / checkedList.length
+                console.log(m)
+                checkedList.map((e: string) => {
+                    switch (e) {
+                        case 'Not Elegible':
+                            let NotEle = generadorArrayDeterminado(7)
+                            break;
+                        case 'Unable to provide Require':
+                            let UnaPro = generadorArrayDeterminado(7);
+                            break;
+                        case 'Technical dificultes with web site':
+                            let TechDifi = generadorArrayDeterminado(7);
+                            break;
+                        case 'No vaccine apointments':
+                            let NoVacc = generadorArrayDeterminado(7)
+                            break;
+                        case 'Apointment times did':
+                            let Apoin = generadorArrayDeterminado(7)
+                            break;
+                        case 'Limit internet':
+                            let Limit = generadorArrayDeterminado(7)
+                            break;
+                        case 'Need childcare':
+                            let Need = generadorArrayDeterminado(7)
+                            break;
+                        case 'Difficulty traveling':
+                            let Dif = generadorArrayDeterminado(7)
+
+                            break;
+                        case 'Difficult leave':
+                            let DifL = generadorArrayDeterminado(7)
+                            break;
+                    }
+
+                })
+                printChart3(svgRef4, checkedList.length, 360/checkedList.length,  UnaPro, TechDifi, NoVacc, Apoin, Limit, NotEle, Need, Dif, DifL)
+
+
+            })
+    }
     useEffect(() => {
         //Generando circulos
 
@@ -93,7 +147,10 @@ export default function Grafica() {
 
         printChart(UnaPro, TechDifi, NoVacc, Apoin, Limit, NotEle, Need, Dif, DifL, 40, 80, 120, 160, 200, 240, 280, 320, 360, svgRef2)
 
-        Circle(svgRef2, [100, 150 , 200, 250, 300], 'giokio')
+        //printChart3(svgRef4, checkedList.length, 360/checkedList.length,  UnaPro, TechDifi, NoVacc, Apoin, Limit, NotEle, Need, Dif, DifL)
+        
+
+        Circle(svgRef2, [100, 150, 200, 250, 300], 'giokio')
 
         d3.selectAll('path')
             .on('mouseover', function (d, i) {
@@ -104,9 +161,19 @@ export default function Grafica() {
             })
     }, [])
     return <div >
+
+        <button onClick={transition} id='btnChart'>transicion</button>
+
         <svg width='800' height='800'>
             <g ref={svgRef2} transform='translate(400, 400)'></g>
         </svg>
-        <button onClick={transition} id='btnChart'>transicion</button>
+        <div>
+            <CheckboxGroup options={options} value={checkedList} onChange={onChange} />
+            <button onClick={genera} id='btnGenera'>generar</button>
+        </div>
+        <svg width='800' height='800'>
+            <g ref={svgRef4} transform='translate(400, 400)'></g>
+        </svg>
+
     </div>
 }
