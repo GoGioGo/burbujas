@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import * as d3 from 'd3'
-import { data } from './Interfaces'
+import { data } from '../functions/Interfaces'
 
 export function graficaUncirculo(x: number, y: number, r: number, svgRef: any) {
     d3.select(svgRef.current)

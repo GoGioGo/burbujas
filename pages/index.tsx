@@ -1,6 +1,6 @@
-import Circles from './components/Circles'
-import Grafica from './components/Grafica'
-import Prueba from './functions/prueba'
+import Circles from '../components/Circles'
+import Grafica from '../components/Grafica'
+
 export default function Home() {
     return (<>
         <Circles />
